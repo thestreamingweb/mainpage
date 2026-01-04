@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Streaming - Wait for Link</title>
+    <style>
+        body { background: #0f0f0f; color: white; font-family: Arial; text-align: center; padding: 50px; }
+        .ad-space { background: #1c1c1c; border: 1px dashed #444; margin: 20px auto; padding: 20px; max-width: 728px; min-height: 90px; }
+        .timer-box { font-size: 1.5rem; margin: 20px; color: #ffcc00; }
+        #player-section { display: none; margin-top: 30px; }
+        .btn { background: #e50914; color: white; padding: 15px 30px; text-decoration: none; border-radius: 5px; font-weight: bold; cursor: pointer; display: inline-block; }
+    </style>
+</head>
+<body>
+
+    <h1>Please Wait...</h1>
+    <p>Your movie link is being encrypted for secure streaming.</p>
+
+    <div class="ad-space">
+        <p style="color: #666;">[Adsterra Banner Advertisement]</p>
+    </div>
+
+    <div class="timer-box" id="countdown">Your link will appear in 15 seconds...</div>
+
+    <div class="ad-space">
+        <p style="color: #666;">[Adsterra Banner Advertisement]</p>
+    </div>
+
+    <div id="player-section">
+        <h2>Enjoy the Movie</h2>
+        <video width="80%" controls controlsList="nodownload" oncontextmenu="return false;">
+            <source src="" id="videoSource" type="video/mp4">
+        </video>
+        <br><br>
+        <a href="" id="dlButton" class="btn">Download Now</a>
+    </div>
+
+    <script>
+        // Start the timer
+        let seconds = 15;
+        const countdown = document.getElementById('countdown');
+        const playerSection = document.getElementById('player-section');
+
+        // Logic to get movie ID from URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const movieUrl = urlParams.get('link');
+
+        const timer = setInterval(() => {
+            seconds--;
+            countdown.innerText = "Your link will appear in " + seconds + " seconds...";
+            if (seconds <= 0) {
+                clearInterval(timer);
+                countdown.style.display = 'none';
+                playerSection.style.display = 'block';
+                // Inject the link into the video and button
+                document.getElementById('videoSource').src = movieUrl;
+                document.getElementById('dlButton').href = movieUrl;
+            }
+        }, 1000);
+    </script>
+
+    </body>
+</html>
