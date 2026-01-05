@@ -176,10 +176,18 @@
   <section class="gallery">
 
     <a href="https://thestreamingweb.github.io/mainpage/watch.html" target="_blank" class="card-link">
-      <div class="card">
-        <img src="https://www.imdb.com/title/tt33014583/" alt="">
-        <div class="label">DHURANDHAR[2025]</div>
-      </div>
+      <div class="card" onclick="goToWatchPage('YOUR_MOVIE_LINK_HERE')" style="cursor: pointer;">
+    <img src="your-poster.jpg" alt="Movie Title">
+    <h3>Movie Title</h3>
+</div>
+
+<script>
+function goToWatchPage(movieLink) {
+    // This part sends the user to your watch.html page
+    // The Popunder will still open in a new tab because you clicked!
+    window.location.href = "watch.html?link=" + encodeURIComponent(movieLink);
+}
+</script>
     </a>
 
     <a href="https://google.com" target="_blank" class="card-link">
@@ -200,6 +208,7 @@
 
 </body>
 </html>
+
 
 
 
