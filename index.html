@@ -26,28 +26,37 @@
     <h2>The Streaming</h2>
   </header>
 
-  <section class="gallery">
-    <div class="card" onclick="goToWatchPage('YOUR_MOVIE_LINK_HERE')">
-        <img src="your-poster.jpg" alt="Movie">
+    <section class="gallery">
+
+    <div class="card" onclick="goToWatchPage('https://drive.google.com/file/d/15vGLh6uOaM3LvmbBFhxE_sRO9BTyILJf/view?usp=sharing')">
+        <img src="your-poster.jpg" alt="Movie Title">
         <div class="label">Movie Title</div>
     </div>
-    
-    </section>
+
+    <div class="card" onclick="goToWatchPage('https://your-video-link.com/movie2')">
+        <img src="https://via.placeholder.com/400x300" alt="Movie Two">
+        <div class="label">Movie Two</div>
+    </div>
+
+  </section>
 
   <script>
     function goToWatchPage(movieLink) {
-        // 1. We encode the link to keep it safe
-        const destination = "watch.html?link=" + encodeURIComponent(movieLink);
-
-        // 2. We use a small timeout (100ms). 
-        // This gives the Adsterra script time to open the ad in a new tab 
-        // BEFORE we force this tab to change pages.
+        // 1. First, we define where to go
+        const watchPage = "watch.html?link=" + encodeURIComponent(movieLink);
+        
+        // 2. We use a tiny delay (200ms)
+        // This allows Adsterra to pop the ad in a NEW tab first
+        // Then it forces THIS tab to go to the watch page
         setTimeout(function() {
-            window.location.href = destination;
-        }, 100);
+            window.location.href = watchPage;
+        }, 200);
     }
   </script>
 
+  <script src="https://pl28405005.effectivegatecpm.com/06/c2/ba/06c2bab268ceaff56031a87885f381cb.js"></script>
+
 </body>
 </html>
+
 
