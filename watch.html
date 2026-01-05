@@ -1,58 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>The Streaming</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <style>
-    :root { --bg-dark: #0f0f0f; --text-dark: #f5f5f5; --card-dark: #1c1c1c; }
-    body { background: var(--bg-dark); color: var(--text-dark); margin: 0; font-family: Arial, sans-serif; min-height: 100vh; }
-    header { display: flex; align-items: center; justify-content: center; padding: 20px; position: relative; }
-    .gallery { padding: 30px; display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 20px; }
-    .card { border-radius: 12px; background: var(--card-dark); overflow: hidden; box-shadow: 0 10px 25px rgba(0,0,0,0.3); transition: transform 0.3s ease; cursor: pointer; }
-    .card:hover { transform: translateY(-6px); }
-    .card img { width: 100%; height: 160px; object-fit: cover; display: block; }
-    .card .label { padding: 15px; text-align: center; font-size: 0.95rem; font-weight: bold; }
-    #splash { position: fixed; inset: 0; display: flex; align-items: center; justify-content: center; background: #0f0f0f; z-index: 999; animation: fadeOut 1.2s ease forwards 1.8s; }
-    @keyframes fadeOut { to { opacity: 0; visibility: hidden; } }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Watch Movie - The Streaming</title>
+    <style>
+        body { background: #0f0f0f; color: white; font-family: Arial; text-align: center; padding: 20px; }
+        .video-container { max-width: 800px; margin: 20px auto; background: #000; border-radius: 12px; overflow: hidden; }
+        video { width: 100%; display: none; } /* Hidden until timer ends */
+        #timer-box { padding: 50px; font-size: 1.5rem; }
+        .ad-space { margin: 20px 0; min-height: 100px; background: #1c1c1c; display: flex; align-items: center; justify-content: center; border-radius: 8px; }
+    </style>
 </head>
 <body>
 
-  <div id="splash"><h1>The Streaming</h1></div>
+    <h1>The Streaming</h1>
 
-  <header>
-    <h2>The Streaming</h2>
-  </header>
+    <div class="ad-space">
+        </div>
 
-  <section class="gallery">
-
-    <div class="card" onclick="goToWatchPage('https://drive.google.com/uc?export=download&id=15vGLh6uOaM3LvmbBFhxE_sRO9BTyILJf')">
-        <img src="your-poster.jpg" alt="Movie One">
-        <div class="label">Movie One</div>
+    <div class="video-container">
+        <div id="timer-box">Your movie will start in <span id="seconds">15</span> seconds...</div>
+        <video id="moviePlayer" controls>
+            <source id="videoSource" src="" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
     </div>
 
-    <div class="card" onclick="goToWatchPage('https://drive.google.com/uc?export=download&id=ANOTHER_FILE_ID')">
-        <img src="https://via.placeholder.com/400x300" alt="Movie Two">
-        <div class="label">Movie Two</div>
-    </div>
+    <script>
+        // 1. Get the link from the URL address
+        const urlParams = new URLSearchParams(window.location.search);
+        const movieUrl = urlParams.get('link');
 
-  </section>
+        if (movieUrl) {
+            let timeLeft = 15;
+            const timerElement = document.getElementById('seconds');
+            const timerBox = document.getElementById('timer-box');
+            const player = document.getElementById('moviePlayer');
+            const source = document.getElementById('videoSource');
 
-  <script>
-    function goToWatchPage(movieLink) {
-        // 1. Prepare the destination URL
-        const destination = "watch.html?link=" + encodeURIComponent(movieLink);
+            // 2. Start the 15-second timer
+            const countdown = setInterval(() => {
+                timeLeft--;
+                timerElement.innerText = timeLeft;
 
-        // 2. DELAYED REDIRECT: Prevents the ad from blocking your navigation
-        setTimeout(function() {
-            window.location.href = destination;
-        }, 250);
-    }
-  </script>
+                if (timeLeft <= 0) {
+                    clearInterval(countdown);
+                    timerBox.style.display = 'none';
+                    source.src = movieUrl; // Put the Google Drive link into the player
+                    player.style.display = 'block';
+                    player.load();
+                }
+            }, 1000);
+        } else {
+            document.body.innerHTML = "<h1>No movie selected. Go back to Home.</h1>";
+        }
+    </script>
 
-  <script src="https://pl28405005.effectivegatecpm.com/06/c2/ba/06c2bab268ceaff56031a87885f381cb.js"></script>
+    <script src="https://pl28405005.effectivegatecpm.com/06/c2/ba/06c2bab268ceaff56031a87885f381cb.js"></script>
 
 </body>
 </html>
