@@ -1,68 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Streaming - Wait for Link</title>
-    <style>
-        body { background: #0f0f0f; color: white; font-family: Arial; text-align: center; padding: 50px; }
-        .ad-space { background: #1c1c1c; border: 1px dashed #444; margin: 20px auto; padding: 20px; max-width: 728px; min-height: 90px; }
-        .timer-box { font-size: 1.5rem; margin: 20px; color: #ffcc00; }
-        #player-section { display: none; margin-top: 30px; }
-        .btn { background: #e50914; color: white; padding: 15px 30px; text-decoration: none; border-radius: 5px; font-weight: bold; cursor: pointer; display: inline-block; }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Streaming</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    :root { --bg-dark: #0f0f0f; --text-dark: #f5f5f5; --card-dark: #1c1c1c; }
+    body { background: var(--bg-dark); color: var(--text-dark); margin: 0; font-family: Arial, sans-serif; min-height: 100vh; }
+    header { display: flex; align-items: center; justify-content: center; padding: 20px; position: relative; }
+    .gallery { padding: 30px; display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 20px; }
+    .card { border-radius: 12px; background: var(--card-dark); overflow: hidden; box-shadow: 0 10px 25px rgba(0,0,0,0.3); transition: transform 0.3s ease; cursor: pointer; }
+    .card:hover { transform: translateY(-6px); }
+    .card img { width: 100%; height: 160px; object-fit: cover; display: block; }
+    .card .label { padding: 15px; text-align: center; font-size: 0.95rem; font-weight: bold; }
+    #splash { position: fixed; inset: 0; display: flex; align-items: center; justify-content: center; background: #0f0f0f; z-index: 999; animation: fadeOut 1.2s ease forwards 1.8s; }
+    @keyframes fadeOut { to { opacity: 0; visibility: hidden; } }
+  </style>
 </head>
 <body>
 
-    <h1>Please Wait...</h1>
-    <p>Your movie link is being encrypted for secure streaming.</p>
+  <div id="splash"><h1>The Streaming</h1></div>
 
-    <div class="ad-space">
-   <script src="https://pl28405547.effectivegatecpm.com/a7/c7/84/a7c784ecd7385d7198ea4ff54e40ad41.js"></script>
+  <header>
+    <h2>The Streaming</h2>
+  </header>
+
+  <section class="gallery">
+
+    <div class="card" onclick="goToWatchPage('https://drive.google.com/uc?export=download&id=15vGLh6uOaM3LvmbBFhxE_sRO9BTyILJf')">
+        <img src="your-poster.jpg" alt="Movie One">
+        <div class="label">Movie One</div>
     </div>
 
-    <div class="timer-box" id="countdown">Your link will appear in 15 seconds...</div>
-
-    <div class="ad-space">
-        <p style="color: #666;">[Adsterra Banner Advertisement]</p>
+    <div class="card" onclick="goToWatchPage('https://drive.google.com/uc?export=download&id=ANOTHER_FILE_ID')">
+        <img src="https://via.placeholder.com/400x300" alt="Movie Two">
+        <div class="label">Movie Two</div>
     </div>
 
-    <div id="player-section">
-        <h2>Enjoy the Movie</h2>
-        <video width="80%" controls controlsList="nodownload" oncontextmenu="return false;">
-            <source src="" id="videoSource" type="video/mp4">
-        </video>
-        <br><br>
-        <a href="" id="dlButton" class="btn">Download Now</a>
-    </div>
+  </section>
 
-    <script>
-        // Start the timer
-        let seconds = 15;
-        const countdown = document.getElementById('countdown');
-        const playerSection = document.getElementById('player-section');
+  <script>
+    function goToWatchPage(movieLink) {
+        // 1. Prepare the destination URL
+        const destination = "watch.html?link=" + encodeURIComponent(movieLink);
 
-        // Logic to get movie ID from URL
-        const urlParams = new URLSearchParams(window.location.search);
-        const movieUrl = urlParams.get('link');
+        // 2. DELAYED REDIRECT: Prevents the ad from blocking your navigation
+        setTimeout(function() {
+            window.location.href = destination;
+        }, 250);
+    }
+  </script>
 
-        const timer = setInterval(() => {
-            seconds--;
-            countdown.innerText = "Your link will appear in " + seconds + " seconds...";
-            if (seconds <= 0) {
-                clearInterval(timer);
-                countdown.style.display = 'none';
-                playerSection.style.display = 'block';
-                // Inject the link into the video and button
-                document.getElementById('videoSource').src = movieUrl;
-                document.getElementById('dlButton').href = movieUrl;
-            }
-        }, 1000);
-    </script>
+  <script src="https://pl28405005.effectivegatecpm.com/06/c2/ba/06c2bab268ceaff56031a87885f381cb.js"></script>
 
-    </body>
+</body>
 </html>
-
-
-
-
