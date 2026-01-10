@@ -5,13 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Watch Movie - The Streaming</title>
     <style>
-        body { background-color: #0f0f0f; color: white; font-family: Arial, sans-serif; text-align: center; padding: 20px; }
-        .container { max-width: 800px; margin: auto; }
-        #timer-box { background: #1c1c1c; padding: 40px; border-radius: 15px; margin-top: 50px; }
-        #countdown { font-size: 48px; font-weight: bold; color: #ff4757; }
-        #player-container { display: none; margin-top: 20px; }
-        iframe { width: 100%; height: 450px; border: none; border-radius: 10px; background: black; }
-        .ad-space { margin: 20px 0; min-height: 100px; }
+        body { background-color: #0f0f0f; color: white; font-family: Arial, sans-serif; text-align: center; padding: 20px; [cite_start]} [cite: 1, 2]
+        .container { max-width: 800px; margin: auto; [cite_start]} [cite: 2, 3]
+        #timer-box { background: #1c1c1c; padding: 40px; border-radius: 15px; margin-top: 50px; [cite_start]} [cite: 3, 4]
+        #countdown { font-size: 48px; font-weight: bold; color: #ff4757; [cite_start]} [cite: 4]
+        #player-container { display: none; margin-top: 20px; [cite_start]} [cite: 5]
+        iframe { width: 100%; height: 450px; border: none; border-radius: 10px; background: black; [cite_start]} [cite: 6]
+        .ad-space { margin: 20px 0; min-height: 100px; [cite_start]} [cite: 7]
     </style>
 </head>
 <body>
@@ -21,65 +21,66 @@
 
         <div id="timer-box">
             <h3>Please wait while your movie is loading...</h3>
-            <div id="countdown">15</div>
+            [cite_start]<div id="countdown">15</div> [cite: 9]
             <p>Your video will appear automatically.</p>
         </div>
 
         <div id="player-container">
-            <div id="video-wrapper"></div>
+            [cite_start]<div id="video-wrapper"></div> [cite: 9]
         </div>
 
-        <div class="ad-space">
-            </div>
+        <div class="ad-space"></div>
     </div>
 
     <script>
-        let timeLeft = 15;
-        const countdownElement = document.getElementById('countdown');
-        const timerBox = document.getElementById('timer-box');
-        const playerContainer = document.getElementById('player-container');
-        const videoWrapper = document.getElementById('video-wrapper');
+        document.addEventListener("DOMContentLoaded", function() {
+            let timeLeft = 15;
+            [cite_start]const countdownElement = document.getElementById('countdown'); [cite: 10]
+            [cite_start]const timerBox = document.getElementById('timer-box'); [cite: 10]
+            [cite_start]const playerContainer = document.getElementById('player-container'); [cite: 10]
+            [cite_start]const videoWrapper = document.getElementById('video-wrapper'); [cite: 10]
 
-        // 1. Get the link from the URL parameters [cite: 11]
-        const urlParams = new URLSearchParams(window.location.search);
-        let movieLink = urlParams.get('link'); [cite: 12]
+            [cite_start]const urlParams = new URLSearchParams(window.location.search); [cite: 11]
+            [cite_start]let movieLink = urlParams.get('link'); [cite: 12]
 
-        // 2. Timer Countdown [cite: 12]
-        const timer = setInterval(() => {
-            timeLeft--;
-            countdownElement.innerText = timeLeft;
+            // Start the timer
+            const timer = setInterval(() => {
+                timeLeft--;
+                if (countdownElement) {
+                    [cite_start]countdownElement.innerText = timeLeft; [cite: 12]
+                }
 
-            if (timeLeft <= 0) {
-                clearInterval(timer);
-                showVideo(); [cite: 12]
+                if (timeLeft <= 0) {
+                    [cite_start]clearInterval(timer); [cite: 12]
+                    [cite_start]showVideo(); [cite: 12]
+                }
+            [cite_start]}, 1000); [cite: 13]
+
+            function showVideo() {
+                if (!movieLink) {
+                    [cite_start]timerBox.innerHTML = "<h3>Error: No movie link found!</h3>"; [cite: 14]
+                    return;
+                }
+
+                // MEGA link correction
+                let finalEmbedLink = movieLink;
+                if (movieLink.includes("mega.nz/file/")) {
+                    finalEmbedLink = movieLink.replace("/file/", "/embed/");
+                }
+
+                [cite_start]// Switch displays [cite: 18, 19]
+                timerBox.style.display = "none"; 
+                playerContainer.style.display = "block";
+
+                [cite_start]// Insert the iframe [cite: 19, 20]
+                videoWrapper.innerHTML = `
+                    <iframe 
+                        src="${finalEmbedLink}" 
+                        allow="autoplay" 
+                        allowfullscreen>
+                    </iframe>`;
             }
-        }, 1000);
-
-        // 3. Logic to show the MEGA Video [cite: 14]
-        function showVideo() {
-            if (!movieLink) {
-                timerBox.innerHTML = "<h3>Error: No movie link found!</h3>"; [cite: 14]
-                return;
-            }
-
-            // Clean the link: Ensure it is the /embed/ version for MEGA
-            let finalEmbedLink = movieLink;
-            if (movieLink.includes("mega.nz/file/")) {
-                finalEmbedLink = movieLink.replace("/file/", "/embed/");
-            }
-
-            // Hide timer and show player [cite: 18, 19]
-            timerBox.style.display = "none";
-            playerContainer.style.display = "block";
-
-            // Insert the iframe with the MEGA link [cite: 20]
-            videoWrapper.innerHTML = `
-                <iframe 
-                    src="${finalEmbedLink}" 
-                    allow="autoplay" 
-                    allowfullscreen>
-                </iframe>`;
-        }
+        });
     </script>
 </body>
 </html>
