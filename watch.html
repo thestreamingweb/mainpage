@@ -3,84 +3,57 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Watch Movie - The Streaming</title>
+    <title>Watching... - The Streaming</title>
     <style>
-        body { background-color: #0f0f0f; color: white; font-family: Arial, sans-serif; text-align: center; padding: 20px; [cite_start]} [cite: 1, 2]
-        .container { max-width: 800px; margin: auto; [cite_start]} [cite: 2, 3]
-        #timer-box { background: #1c1c1c; padding: 40px; border-radius: 15px; margin-top: 50px; [cite_start]} [cite: 3, 4]
-        #countdown { font-size: 48px; font-weight: bold; color: #ff4757; [cite_start]} [cite: 4]
-        #player-container { display: none; margin-top: 20px; [cite_start]} [cite: 5]
-        iframe { width: 100%; height: 450px; border: none; border-radius: 10px; background: black; [cite_start]} [cite: 6]
-        .ad-space { margin: 20px 0; min-height: 100px; [cite_start]} [cite: 7]
+        body { background: #0f0f0f; color: white; font-family: sans-serif; text-align: center; padding: 20px; }
+        #timer-box { background: #1c1c1c; padding: 40px; border-radius: 15px; max-width: 500px; margin: 50px auto; }
+        #countdown { font-size: 50px; color: #ff4757; margin: 20px 0; }
+        #player-wrapper { display: none; width: 100%; max-width: 900px; margin: auto; }
+        iframe { width: 100%; height: 500px; border: none; border-radius: 10px; }
+        .ad-area { margin: 20px auto; min-height: 100px; }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <h2>The Streaming</h2>
+    <div id="timer-box">
+        <h3>Loading Movie...</h3>
+        <div id="countdown">15</div>
+        <p>Please wait for the player to load.</p>
+    </div>
 
-        <div id="timer-box">
-            <h3>Please wait while your movie is loading...</h3>
-            [cite_start]<div id="countdown">15</div> [cite: 9]
-            <p>Your video will appear automatically.</p>
+    <div class="ad-area">
         </div>
 
-        <div id="player-container">
-            [cite_start]<div id="video-wrapper"></div> [cite: 9]
-        </div>
-
-        <div class="ad-space"></div>
+    <div id="player-wrapper">
+        <div id="mega-player"></div>
     </div>
 
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            let timeLeft = 15;
-            [cite_start]const countdownElement = document.getElementById('countdown'); [cite: 10]
-            [cite_start]const timerBox = document.getElementById('timer-box'); [cite: 10]
-            [cite_start]const playerContainer = document.getElementById('player-container'); [cite: 10]
-            [cite_start]const videoWrapper = document.getElementById('video-wrapper'); [cite: 10]
+        let seconds = 15;
+        const urlParams = new URLSearchParams(window.location.search);
+        const megaLink = urlParams.get('link');
 
-            [cite_start]const urlParams = new URLSearchParams(window.location.search); [cite: 11]
-            [cite_start]let movieLink = urlParams.get('link'); [cite: 12]
-
-            // Start the timer
-            const timer = setInterval(() => {
-                timeLeft--;
-                if (countdownElement) {
-                    [cite_start]countdownElement.innerText = timeLeft; [cite: 12]
-                }
-
-                if (timeLeft <= 0) {
-                    [cite_start]clearInterval(timer); [cite: 12]
-                    [cite_start]showVideo(); [cite: 12]
-                }
-            [cite_start]}, 1000); [cite: 13]
-
-            function showVideo() {
-                if (!movieLink) {
-                    [cite_start]timerBox.innerHTML = "<h3>Error: No movie link found!</h3>"; [cite: 14]
-                    return;
-                }
-
-                // MEGA link correction
-                let finalEmbedLink = movieLink;
-                if (movieLink.includes("mega.nz/file/")) {
-                    finalEmbedLink = movieLink.replace("/file/", "/embed/");
-                }
-
-                [cite_start]// Switch displays [cite: 18, 19]
-                timerBox.style.display = "none"; 
-                playerContainer.style.display = "block";
-
-                [cite_start]// Insert the iframe [cite: 19, 20]
-                videoWrapper.innerHTML = `
-                    <iframe 
-                        src="${finalEmbedLink}" 
-                        allow="autoplay" 
-                        allowfullscreen>
-                    </iframe>`;
+        const countdown = setInterval(() => {
+            seconds--;
+            document.getElementById('countdown').innerText = seconds;
+            if (seconds <= 0) {
+                clearInterval(countdown);
+                startPlayer();
             }
-        });
+        }, 1000);
+
+        function startPlayer() {
+            if (!megaLink) {
+                alert("No link found!");
+                return;
+            }
+            document.getElementById('timer-box').style.display = 'none';
+            document.getElementById('player-wrapper').style.display = 'block';
+            
+            // Insert the Mega Iframe
+            document.getElementById('mega-player').innerHTML = 
+                `<iframe src="${megaLink}" allowfullscreen allow="autoplay"></iframe>`;
+        }
     </script>
 </body>
 </html>
