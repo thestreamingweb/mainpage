@@ -79,19 +79,27 @@
 
     </section>
 
-  <script>
+ <script>
     function goToWatchPage(megaLink) {
+        // 1. YOUR ADSTERRA DIRECT LINK
+        // Replace the link below with your actual Direct Link from Adsterra
+        const myAdLink = "https://pl28405005.effectivegatecpm.com/06/c2/ba/06c2bab268ceaff56031a87885f381cb.js";
+
+        // 2. Open the ad in a new tab immediately
+        window.open(myAdLink, '_blank');
+
+        // 3. YOUR ORIGINAL LOGIC
+        // This keeps the redirect to watch.html exactly as it was
         const destination = "watch.html?link=" + encodeURIComponent(megaLink);
-        // Delay ensures Adsterra Popunder opens in new tab first
+        
         setTimeout(function() {
             window.location.href = destination;
         }, 300);
     }
-  </script>
-
-  <script src="https://pl28405005.effectivegatecpm.com/06/c2/ba/06c2bab268ceaff56031a87885f381cb.js"></script>
-</body>
+</script> 
+  
 </html>
+
 
 
 
