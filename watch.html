@@ -54,18 +54,19 @@
             document.getElementById('timer-box').style.display = 'none';
 
             // 2. Add your custom text above the player
-            document.getElementById('movie-ready-text').innerText = "✅ Your movie is ready! Enjoy watching.";
+            document.getElementById('movie-ready-text').innerText = "The movie will load acc to your network speed<br>Please be patient.";
 
             // 3. Show the player container
             document.getElementById('player-wrapper').style.display = 'block';
             
             // 4. Insert the Mega Iframe
-            document.getElementById('mega-player').innerHTML ="The movie will load acc to your network speed<br>Please be patient." 
+            document.getElementById('mega-player').innerHTML =
                 `<iframe src="${megaLink}" allowfullscreen allow="autoplay"></iframe>`;
         }
     </script> 
 </body>
 </html>
+
 
 
 
