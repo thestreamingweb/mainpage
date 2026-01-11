@@ -24,8 +24,9 @@
     <div class="ad-area">
         </div>
 
-    <div id="player-wrapper">
-        <h3 id="Movie will be loaded according to your net<br>Please be patient.></h3>
+  <div id="player-wrapper">
+        <h3 id="Movie will load according to yor net network.<br>PLEASEbe patient." style="color: #ff4757; margin-bottom: 15px;"></h3>
+        
         <div id="mega-player"></div>
     </div>
 
@@ -48,14 +49,22 @@
                 alert("No link found!");
                 return;
             }
+
+            // 1. Hide the timer
             document.getElementById('timer-box').style.display = 'none';
+
+            // 2. Add your custom text above the player
+            document.getElementById('movie-ready-text').innerText = "✅ Your movie is ready! Enjoy watching.";
+
+            // 3. Show the player container
             document.getElementById('player-wrapper').style.display = 'block';
             
-            // Insert the Mega Iframe
+            // 4. Insert the Mega Iframe
             document.getElementById('mega-player').innerHTML = 
                 `<iframe src="${megaLink}" allowfullscreen allow="autoplay"></iframe>`;
         }
-    </script>
+    </script> 
 </body>
 </html>
+
 
