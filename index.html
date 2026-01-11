@@ -26,11 +26,11 @@
   
 <div class="request-container">
     <h3>Can't find a movie?</h3>
-    <p>Type the name below and it will upload in 2 to 3 days!</p>
+    <p>Type the name below and we will upload it!</p>
     
-    <form action="https://docs.google.com/forms/d/e/entry.1332321137/formResponse" method="POST" target="_blank" id="requestForm">
+    <form action="https://docs.google.com/forms/d/1w9xcxtBvR-HguXDgoivzw8VrkurPsVXYXjCdo-buPMg/formResponse" method="POST" target="_blank">
         
-        <input type="text" name="entry.123456789" placeholder="Enter Movie Name..." required>
+        <input type="text" name="entry.1332321137" placeholder="Enter Movie Name..." required>
         
         <button type="submit">Request Movie</button>
     </form>
@@ -38,35 +38,37 @@
 
 <style>
     .request-container {
-        background: var(--card-dark);
-        padding: 20px;
+        background: #1c1c1c;
+        padding: 25px;
         margin: 20px auto;
-        max-width: 600px;
+        max-width: 500px;
         border-radius: 12px;
         text-align: center;
-        border: 1px solid #333;
+        border: 2px solid #ff4757; /* Matches your streaming theme */
     }
-    .request-container h3 { margin-bottom: 5px; color: #ff4757; }
+    .request-container h3 { color: #ff4757; margin-top: 0; }
     .request-container input {
-        width: 70%;
-        padding: 10px;
-        border-radius: 5px;
+        width: 80%;
+        padding: 12px;
+        border-radius: 8px;
         border: 1px solid #444;
         background: #0f0f0f;
         color: white;
-        margin-top: 10px;
+        margin-bottom: 15px;
+        outline: none;
     }
     .request-container button {
-        padding: 10px 20px;
-        border-radius: 5px;
+        width: 85%;
+        padding: 12px;
+        border-radius: 8px;
         border: none;
         background: #ff4757;
         color: white;
         font-weight: bold;
         cursor: pointer;
-        margin-left: 5px;
+        transition: 0.3s;
     }
-    .request-container button:hover { background: #ff6b81; }
+    .request-container button:hover { background: #ff6b81; transform: scale(1.02); }
 </style>
 
   <section class="gallery">
@@ -90,6 +92,7 @@
   <script src="https://pl28405005.effectivegatecpm.com/06/c2/ba/06c2bab268ceaff56031a87885f381cb.js"></script>
 </body>
 </html>
+
 
 
 
