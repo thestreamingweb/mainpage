@@ -25,7 +25,7 @@
         </div>
 
   <div id="player-wrapper">
-        <h3 id="Movie will load according to yor net network.<br>PLEASEbe patient." style="color: #ff4757; margin-bottom: 15px;"></h3>
+        <h3 id="movie-ready-text" style="color: #ff4757; margin-bottom: 15px;"></h3>
         
         <div id="mega-player"></div>
     </div>
@@ -60,11 +60,12 @@
             document.getElementById('player-wrapper').style.display = 'block';
             
             // 4. Insert the Mega Iframe
-            document.getElementById('mega-player').innerHTML = 
+            document.getElementById('mega-player').innerHTML ="The movie will load acc to your network speed<br>Please be patient." 
                 `<iframe src="${megaLink}" allowfullscreen allow="autoplay"></iframe>`;
         }
     </script> 
 </body>
 </html>
+
 
 
