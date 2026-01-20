@@ -106,8 +106,12 @@
             document.getElementById('movie-ready-text').innerText = "Streaming now... Please wait for the player to load.";
 
             // Load the Mega Iframe [cite: 15]
-            document.getElementById('mega-player').innerHTML = `<iframe src="${link}" allowfullscreen allow="autoplay"></iframe>`;
-
+            document.getElementById('mega-player').innerHTML = `<iframe src="${link}" 
+        allowfullscreen="true" 
+        webkitallowfullscreen="true" 
+        mozallowfullscreen="true" 
+        allow="autoplay; fullscreen">
+    </iframe>`;
             // Load the Ad AFTER the player is shown to prevent freezing
             const adSlot = document.getElementById('ad-slot');
             const adConfig = document.createElement('script');
@@ -129,3 +133,4 @@
     </script> 
 </body>
 </html>
+
