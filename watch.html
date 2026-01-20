@@ -1,66 +1,96 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Watching... - The Streaming</title>
-    <style>
-        body { background: #0f0f0f; color: white; font-family: sans-serif; text-align: center; padding: 20px; }
-        #timer-box { background: #1c1c1c; padding: 40px; border-radius: 15px; max-width: 500px; margin: 50px auto; }
-        #countdown { font-size: 50px; color: #ff4757; margin: 20px 0; }
-        #player-wrapper { display: none; width: 100%; max-width: 900px; margin: auto; }
-        iframe { width: 100%; height: 500px; border: none; border-radius: 10px; }
-        .ad-area { margin: 20px auto; min-height: 100px; }
-    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Watching... - The Streaming</title>
+    <style>
+        body { background: #0f0f0f; color: white; font-family: sans-serif; text-align: center; padding: 20px; } [cite: 1, 2]
+        #timer-box { background: #1c1c1c; padding: 40px; border-radius: 15px; max-width: 500px; margin: 50px auto; } [cite: 2, 3]
+        #countdown { font-size: 50px; color: #ff4757; margin: 20px 0; } [cite: 3, 4]
+        #player-wrapper { display: none; width: 100%; max-width: 900px; margin: auto; } [cite: 4, 5]
+        iframe { width: 100%; height: 500px; border: none; border-radius: 10px; } [cite: 5, 6]
+        
+        /* Mobile Responsive Ad Styles */
+        .mobile-ad-wrapper { width: 100%; padding: 0 15px; margin: 10px auto; box-sizing: border-box; text-align: center; }
+        .ad-hint { display: block; font-size: 10px; color: #555; margin-bottom: 5px; text-transform: uppercase; }
+        .ad-box { background: #151515; border: 1px solid #222; border-radius: 10px; padding: 5px; display: inline-block; min-width: 300px; min-height: 250px; max-width: 100%; overflow: hidden; }
+
+        /* Download Button Styles */
+        .download-section { margin-top: 25px; text-align: center; }
+        .dl-button { background: linear-gradient(135deg, #2ecc71, #27ae60); color: white; border: none; padding: 15px 30px; font-size: 1.1rem; font-weight: bold; border-radius: 50px; cursor: pointer; width: 90%; max-width: 300px; box-shadow: 0 4px 15px rgba(46, 204, 113, 0.3); transition: 0.2s; }
+        .dl-button:active { transform: scale(0.95); }
+    </style>
 </head>
 <body>
 
-    <div id="timer-box">
-        <h3>Loading Movie...</h3>
-        <div id="countdown">15</div>
-        <p>Please wait for the player to load.</p>
-    </div>
+    <div id="timer-box">
+        <h3>Loading Movie...</h3> [cite: 8]
+        <div id="countdown">15</div> [cite: 8]
+        <p>Please wait for the player to load.</p> [cite: 8]
+    </div>
+    
+    <div id="player-wrapper">
+        <h3 id="movie-ready-text" style="color: #ff4757; margin-bottom: 15px;"></h3> [cite: 8]
+        <div id="mega-player"></div> [cite: 8]
 
-     
-  <div id="player-wrapper">
-        <h3 id="movie-ready-text" style="color: #ff4757; margin-bottom: 15px;"></h3>
-        
-        <div id="mega-player"></div>
-    </div>
+        <div class="download-section">
+            <button id="download-btn" onclick="downloadMovie()" class="dl-button">
+                📥 Download Movie (High Speed)
+            </button>
+        </div>
+    </div>
 
-    <script>
-        let seconds = 15;
-        const urlParams = new URLSearchParams(window.location.search);
-        const megaLink = urlParams.get('link');
+    <div class="mobile-ad-wrapper">
+        <span class="ad-hint">Advertisement</span>
+        <div class="ad-box">
+            <script type="text/javascript">
+                atOptions = {
+                    'key' : '3b2c5d8c2417703ecfa2973791db7e7a',
+                    'format' : 'iframe',
+                    'height' : 250,
+                    'width' : 300,
+                    'params' : {}
+                };
+            </script>
+            <script type="text/javascript" src="https://www.highperformanceformat.com/3b2c5d8c2417703ecfa2973791db7e7a/invoke.js"></script>
+        </div>
+    </div>
 
-        const countdown = setInterval(() => {
-            seconds--;
-            document.getElementById('countdown').innerText = seconds;
-            if (seconds <= 0) {
-                clearInterval(countdown);
-                startPlayer();
-            }
-        }, 1000);
+    <script>
+        let seconds = 15; [cite: 9]
+        const urlParams = new URLSearchParams(window.location.search); [cite: 9]
+        const megaLink = urlParams.get('link'); [cite: 9]
 
-        function startPlayer() {
-            if (!megaLink) {
-                alert("No link found!");
-                return;
-            }
+        const countdown = setInterval(() => {
+            seconds--; [cite: 9]
+            document.getElementById('countdown').innerText = seconds; [cite: 9]
+            if (seconds <= 0) {
+                clearInterval(countdown); [cite: 10]
+                startPlayer(); [cite: 10]
+            }
+        }, 1000); [cite: 10]
 
-            // 1. Hide the timer
-            document.getElementById('timer-box').style.display = 'none';
+        function startPlayer() {
+            if (!megaLink) {
+                alert("No link found!"); [cite: 11]
+                return; [cite: 12]
+            }
 
-            // 2. Add your custom text above the player
-            document.getElementById('movie-ready-text').innerText = "The movie will load acc to your network speed. Please be patient.";
+            document.getElementById('timer-box').style.display = 'none'; [cite: 12]
+            document.getElementById('movie-ready-text').innerText = "The movie will load acc to your network speed. Please be patient."; [cite: 13]
+            document.getElementById('player-wrapper').style.display = 'block'; [cite: 14]
+            
+            document.getElementById('mega-player').innerHTML =
+                `<iframe src="${megaLink}" allowfullscreen allow="autoplay"></iframe>`; [cite: 15]
+        }
 
-            // 3. Show the player container
-            document.getElementById('player-wrapper').style.display = 'block';
-            
-            // 4. Insert the Mega Iframe
-            document.getElementById('mega-player').innerHTML =
-                `<iframe src="${megaLink}" allowfullscreen allow="autoplay"></iframe>`;
-        }
-    </script> 
+        function downloadMovie() {
+            if (megaLink) {
+                let dlLink = megaLink.replace('embed', 'file');
+                window.open(dlLink, '_blank');
+            }
+        }
+    </script> 
 </body>
 </html>
