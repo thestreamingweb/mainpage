@@ -16,6 +16,37 @@
     .card .label { padding: 15px; text-align: center; font-weight: bold; }
     #splash { position: fixed; inset: 0; display: flex; align-items: center; justify-content: center; background: #0f0f0f; z-index: 999; animation: fadeOut 1s forwards 1.5s; }
     @keyframes fadeOut { to { opacity: 0; visibility: hidden; } }
+    .search-container {
+    max-width: 500px;
+    margin: 20px auto;
+    position: relative;
+    padding: 0 20px;
+}
+
+#movie-search {
+    width: 100%;
+    padding: 12px 45px 12px 20px;
+    border-radius: 25px;
+    border: 2px solid #222;
+    background: #1c1c1c;
+    color: white;
+    font-size: 16px;
+    outline: none;
+    transition: 0.3s;
+}
+
+#movie-search:focus {
+    border-color: #ff4757;
+    box-shadow: 0 0 10px rgba(255, 71, 87, 0.3);
+}
+
+.search-container i {
+    position: absolute;
+    right: 35px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #555;
+}
   </style>
 </head>
 <body>
@@ -23,6 +54,11 @@
   <div id="splash"><h1>The Streaming</h1></div>
 
   <header><h2>The Streaming</h2></header>
+  
+  <div class="search-container">
+    <input type="text" id="movie-search" placeholder="Search for movies..." onkeyup="searchMovies()">
+    <i class="fas fa-search"></i>
+</div>
   
 <div class="request-container">
     <h3>Can't find a movie?</h3>
@@ -101,9 +137,29 @@
             window.location.href = destination;
         }, 300);
     }
+   //search script.
+   function searchMovies() {
+    // 1. Get the text from the search bar
+    let input = document.getElementById('movie-search').value.toLowerCase();
+    
+    // 2. Get all the movie cards
+    let cards = document.getElementsByClassName('card');
+
+    // 3. Loop through cards and hide those that don't match
+    for (let i = 0; i < cards.length; i++) {
+        let title = cards[i].querySelector('.label h3').innerText.toLowerCase();
+        
+        if (title.includes(input)) {
+            cards[i].style.display = "block"; // Show match
+        } else {
+            cards[i].style.display = "none";  // Hide others
+        }
+    }
+}
 </script> 
   
 </html>
+
 
 
 
