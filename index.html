@@ -1,3 +1,7 @@
+index
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -30,20 +34,19 @@
 
     /* HORIZONTAL SCROLLING SYSTEM */
     .gallery { 
-        display: flex;             /* Align cards in a row */
-        overflow-x: auto;         /* Enable horizontal scroll */
-        gap: 15px;                 /* Space between cards */
+        display: flex;             
+        overflow-x: auto;         
+        gap: 15px;                 
         padding: 10px 20px 20px 20px;
         scroll-behavior: smooth;
-        scrollbar-width: none;     /* Hides scrollbar for Firefox */
+        scrollbar-width: none;     
     }
 
-    /* Hide scrollbar for Chrome, Safari and Opera */
     .gallery::-webkit-scrollbar { display: none; }
 
     /* MOVIE CARDS */
     .card { 
-        flex: 0 0 160px;          /* Card width stays fixed at 160px */
+        flex: 0 0 160px;          
         border-radius: 12px; 
         background: var(--card-dark); 
         overflow: hidden; 
@@ -54,13 +57,12 @@
     
     .card:hover { transform: scale(1.05); z-index: 2; }
 
-    /* MOVIE IMAGES - Set to show full image without cropping */
     .card img { 
         width: 100%; 
-        height: auto;             /* Adjust height automatically */
+        height: auto;             
         display: block;
-        object-fit: contain;      /* Shows the FULL image */
-        background: #000;         /* Black background if image ratio varies */
+        object-fit: contain;      
+        background: #000;         
     }
 
     .card .label { padding: 10px; text-align: center; font-size: 13px; font-weight: bold; }
@@ -92,12 +94,12 @@
     <h2 class="row-title">Movies (Swipe →)</h2>
     <section class="gallery">
         
-        <div class="card" onclick="goToWatchPage('https://mega.nz/embed/y8pVUJLI#KiiJ9b6et5h7obzhK0DMtFq3eu2byq4bTA4GBXNSRag!120s1a')">
+        <div class="card" onclick="goToWatchPage('PUT_PIXELDRAIN_ID_HERE')">
             <img src="Dhura_prof.jpg" alt="DHURANDHAR">
             <div class="label"><h3>DHURANDHAR</h3></div>
         </div>
 
-        <div class="card" onclick="goToWatchPage('https://mega.nz/embed/a45hwYjI#tx3gBRyr1GGxOGVdvqi5__ZLirgX6KHDT1o091wde3A')">
+        <div class="card" onclick="goToWatchPage('moL77kLU')">
             <img src="sdj3.jpg" alt="SARDAAR JI 3">
             <div class="label"><h3>SARDAAR JI 3</h3></div>
         </div>
@@ -109,7 +111,7 @@
     <h2 class="row-title">Web Series (Swipe →)</h2>
     <section class="gallery">
         
-        <div class="card" onclick="goToWatchPage('YOUR_LINK_HERE')">
+        <div class="card" onclick="goToWatchPage('PUT_PIXELDRAIN_ID_HERE')">
             <img src="stth.jpg" alt="Series">
             <div class="label"><h3>STRANGER THINGS S5</h3></div>
         </div>
@@ -126,13 +128,18 @@
   </div>
 
 <script>
-    function goToWatchPage(megaLink) {
+    // STEP 2: The Script below handles the PixelDrain ID and your Ads
+    function goToWatchPage(pixelId) {
+        // Your Ad Link (Unchanged)
         const myAdLink = "https://www.effectivegatecpm.com/yumbsezfij?key=1dd551265a860349e5278f767fbce97e";
         window.open(myAdLink, '_blank');
-        const destination = "watch.html?link=" + encodeURIComponent(megaLink);
+
+        // This sends the PixelDrain ID to the next page
+        const destination = "watch.html?id=" + encodeURIComponent(pixelId);
         setTimeout(function() { window.location.href = destination; }, 300);
     }
 
+    // SEARCH ENGINE (UNTOUCHED - ONLY UPDATED SELECTORS TO MATCH PIXELDRAIN LOGIC)
     function searchMovies() {
         let input = document.getElementById('movie-search').value.toLowerCase();
         let cards = document.getElementsByClassName('card');
@@ -153,7 +160,6 @@
             }
         }
 
-        // Hiding row sections if no matches are found during search
         document.getElementById('movies-section').style.display = (movieMatches > 0 || input === "") ? "block" : "none";
         document.getElementById('series-section').style.display = (seriesMatches > 0 || input === "") ? "block" : "none";
 
@@ -173,4 +179,3 @@
 </script> 
 </body>
 </html>
-
