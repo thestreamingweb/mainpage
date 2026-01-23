@@ -62,12 +62,15 @@
 
     <div id="player-wrapper">
         <h3 id="movie-ready-text" style="color: #ff4757; margin-bottom: 15px;"></h3>
-        <div id="pixeldrain-player"></div> <div class="scroll-hint">
+        <div id="mega-player"></div>
+
+        <div class="scroll-hint">
             <h2>For Download Go Down</h2>
             <div class="arrow">⬇️</div>
         </div>
 
-        <div class="ad-container" id="ad-slot"></div>
+        <div class="ad-container" id="ad-slot">
+            </div>
 
         <div class="download-section">
             <button onclick="downloadMovie()" class="dl-button">📥 Download Movie Now</button>
@@ -75,42 +78,41 @@
     </div>
 
     <script>
+        // Start the logic ONLY when the page is fully ready
         window.onload = function() {
             let seconds = 15;
             const urlParams = new URLSearchParams(window.location.search);
-            // Changed parameter from 'link' to 'id' to match our index code
-            const pixelId = urlParams.get('id');
+            const megaLink = urlParams.get('link');
 
             const countdown = setInterval(() => {
                 seconds--;
                 document.getElementById('countdown').innerText = seconds;
                 if (seconds <= 0) {
                     clearInterval(countdown);
-                    showContent(pixelId);
+                    showContent(megaLink);
                 }
             }, 1000);
         };
 
-        function showContent(id) {
-            if (!id) {
-                alert("No Movie ID found!");
+        function showContent(link) {
+            if (!link) {
+                alert("No link found!");
                 return;
             }
 
+            // Hide timer and show player wrapper [cite: 12, 14]
             document.getElementById('timer-box').style.display = 'none';
             document.getElementById('player-wrapper').style.display = 'block';
             document.getElementById('movie-ready-text').innerText = "Streaming now... Please wait for the player to load.";
 
-            // LOAD PIXELDRAIN EMBED PLAYER
-            // We use the ID to create the API embed link
-            document.getElementById('pixeldrain-player').innerHTML = `<iframe src="https://pixeldrain.com/api/file/${id}?embed" 
-                allowfullscreen="true" 
-                webkitallowfullscreen="true" 
-                mozallowfullscreen="true" 
-                allow="autoplay; fullscreen">
-            </iframe>`;
-
-            // Load Ads (Unchanged)
+            // Load the Mega Iframe [cite: 15]
+            document.getElementById('mega-player').innerHTML = `<iframe src="${link}" 
+        allowfullscreen="true" 
+        webkitallowfullscreen="true" 
+        mozallowfullscreen="true" 
+        allow="autoplay; fullscreen">
+    </iframe>`;
+            // Load the Ad AFTER the player is shown to prevent freezing
             const adSlot = document.getElementById('ad-slot');
             const adConfig = document.createElement('script');
             adConfig.text = `atOptions = { 'key' : '3b2c5d8c2417703ecfa2973791db7e7a', 'format' : 'iframe', 'height' : 250, 'width' : 300, 'params' : {} };`;
@@ -123,11 +125,9 @@
 
         function downloadMovie() {
             const urlParams = new URLSearchParams(window.location.search);
-            const id = urlParams.get('id');
-            if (id) {
-                // REDIRECT TO DIRECT DOWNLOAD LINK
-                // This triggers the 10% download requirement to reset the 60-day timer
-                window.open("https://pixeldrain.com/api/file/" + id + "?download", '_blank');
+            const link = urlParams.get('link');
+            if (link) {
+                window.open(link.replace('embed', 'file'), '_blank');
             }
         }
     </script> 
